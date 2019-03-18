@@ -19,8 +19,8 @@ class MaglevHash:
         self.permutation = []
         self.generate_permutations()
 
-        # Next stores the next index to the permutation array that it can
-        # consider. Each backend start with their 1st choice at index 0.
+        # Next stores the next index to the permutation array that a backend
+        # can consider. Each backend start with their 1st choice at index 0.
         # If the backend is taken, or if it takes one, increment that
         # backend's counter.
         self.next = [0] * self.N
