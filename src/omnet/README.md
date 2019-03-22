@@ -7,7 +7,7 @@
 opp_makemake --deep -f -o run_maglev
 ```
 ### To run
-1. 
+1. Run the executable,
 ```bash
 ./run_maglev
 ```
