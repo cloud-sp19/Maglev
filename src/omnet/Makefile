@@ -30,7 +30,7 @@ PROJECTRELATIVE_PATH =
 O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 
 # Object files for local .cc, .msg and .sm files
-OBJS = $O/balancer.o $O/endpoint.o $O/server.o
+OBJS = $O/balancer.o $O/endpoint.o
 
 # Message files
 MSGFILES =

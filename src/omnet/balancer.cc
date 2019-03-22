@@ -25,11 +25,14 @@ class MaglevBalancer : public cSimpleModule {
 
         /* Initializes Maglev hash table. */
         void initializeMaglev();
+        int simpleHash(int a, int x, int b, int prime) const;
         int hash1(int x) const;
         int hash2(int x) const;
         void permuteBackend(int backend_id);
         void permuteBackends(bool debug=false);
         void populateHash(bool debug=false);
+        void printPermutations() const;
+        void printHash() const;
         /* Performs maglev lookup. */
         void maglevHash();
 
@@ -57,26 +60,26 @@ void MaglevBalancer::initialize() {
     /* Permutations array is an array that holds each endpoints'
      * desired table indices. */
     _permutations = std::vector<std::vector<int>>(_num_endpoints);
+    /* Lookup is a _num_entry length array that reserves equal number
+     * of table entries for backends. */
+    _lookup = std::vector<int>(_num_entries, -1);
 
     initializeMaglev();
+    return;
+}
+
+int MaglevBalancer::simpleHash(int a, int x, int b, int prime) const {
+    return (a * x + b) % prime;
 }
 
 int MaglevBalancer::hash1(int x) const {
-    // TODO assert that x is not negative.
     // TODO use an actual hash function.
-    int simple_a = 5;
-    int simple_b = 9;
-    int simple_prime = 211;
-    return (simple_a * x + simple_b) % simple_prime;
+    return simpleHash(5, abs(x), 9, 211);
 }
 
 int MaglevBalancer::hash2(int x) const {
-    // TODO assert that x is not negative.
     // TODO use an actual hash function.
-    int simple_a = 12;
-    int simple_b = 2;
-    int simple_prime = 379;
-    return (simple_a * x + simple_b) % simple_prime;
+    return simpleHash(12, abs(x), 2, 379);
 }
 
 void MaglevBalancer::permuteBackend(int backend_id) {
@@ -86,8 +89,9 @@ void MaglevBalancer::permuteBackend(int backend_id) {
     int skip = (hash2(backend_id) % (_num_entries - 1)) + 1;
 
     for (int j = 0; j < _num_entries; j++) {
-        _permutations[backend_id][j] = (skip * j + offset) % _num_entries;
+        _permutations[backend_id][j] = simpleHash(skip, j, offset, _num_entries);
     }
+    return;
 }
 
 void MaglevBalancer::permuteBackends(bool debug) {
@@ -95,33 +99,78 @@ void MaglevBalancer::permuteBackends(bool debug) {
         permuteBackend(i);
     }
 
-    if (debug) {
-        for (int i = 0; i < _num_endpoints; i++) {
-            std::cout << "backend " << i << ": [";
-            for (int j = 0; j < _num_entries-1; j++) {
-                std::cout << _permutations[i][j] << ", ";
-            }
-            std::cout << _permutations[i][_num_endpoints-1] << "]" << std::endl;
-        }
-    }
+    if (debug) printPermutations();
+    return;
 }
 
-void MaglevBalancer::populateHash(bool debug) {
 
+void MaglevBalancer::populateHash(bool debug) {
+    /* The number of lookup table entries taken so far. */
+    int num_taken = 0;
+    /* Keep track of the next lookup index that the endpoint wants. */
+    std::vector<int> next(_num_endpoints, 0);
+
+    while (true) {
+        for (int i = 0; i < _num_endpoints; i++) {
+            /* The next lookup index backend 'i' wants. */
+            int want = _permutations[i][next[i]];
+
+            /* Lookup index is taken. */
+            while (_lookup[want] >= 0) {
+                want = _permutations[i][++next[i]];
+            }
+
+            /* Found a free index. Lookup table hashes to endpoint. */
+            _lookup[want] = i;
+            next[i]++;
+            num_taken++;
+            if (debug) std::cout << i << " chose " << want << std::endl;
+
+            /* Lookup table is full. */
+            if (num_taken == _num_entries) {
+                if (debug) printHash();
+                return;
+            }
+        }
+    }
+    return;
 }
 
 void MaglevBalancer::handleMessage(cMessage *msg) {
     maglevHash();
+    return;
+}
+
+void MaglevBalancer::printPermutations() const {
+    for (int i = 0; i < _num_endpoints; i++) {
+        std::cout << "backend " << i << ": [";
+        for (int j = 0; j < _num_entries-1; j++) {
+            std::cout << _permutations[i][j] << ", ";
+        }
+        std::cout << _permutations[i][_num_entries-1] << "]" << std::endl;
+    }
+    return;
+}
+
+void MaglevBalancer::printHash() const {
+    std::cout << "Lookup table: [";
+    for (int i = 0; i < _num_entries-1; i++) {
+        std::cout << _lookup[i] << ", ";
+    }
+    std::cout << _lookup[_num_entries-1] << "]" << std::endl;
+    return;
 }
 
 /*===================================================================*/
 
 void MaglevBalancer::initializeMaglev() {
     permuteBackends(true);
-    populateHash();
+    populateHash(true);
+    return;
 }
 
 void MaglevBalancer::maglevHash() {
+    return;
 }
 
 /*===================================================================*/
@@ -130,6 +179,7 @@ void MaglevBalancer::initializeECMP() {
     /* Set seed to represent randomly hashed packets. */
     int seed = 1;
     srand(seed);
+    return;
 }
 
 void MaglevBalancer::ECMP() {
@@ -138,4 +188,5 @@ void MaglevBalancer::ECMP() {
     send(job, "out", rand() % _num_endpoints);
 
     scheduleAt(simTime() + 1, _send_msg_event);
+    return;
 }
