@@ -35,18 +35,12 @@ class MaglevBalancer : public cSimpleModule {
         void printHash() const;
         /* Performs maglev lookup. */
         void maglevHash();
-
-        // TODO Move this somewhere else, some other object.
-        /* Initialization for ECMP. Sets seed to represent randomly
-         * hashed packets. */
-        void initializeECMP();
-        /* Runs ECMP. */
-        void ECMP();
 };
 
 Define_Module(MaglevBalancer);
 
 /*===================================================================*/
+
 void MaglevBalancer::initialize() {
 
     /* Kickoff message. */
@@ -136,11 +130,7 @@ void MaglevBalancer::populateHash(bool debug) {
     return;
 }
 
-void MaglevBalancer::handleMessage(cMessage *msg) {
-    maglevHash();
-    return;
-}
-
+/*===================================================================*/
 void MaglevBalancer::printPermutations() const {
     for (int i = 0; i < _num_endpoints; i++) {
         std::cout << "backend " << i << ": [";
@@ -170,23 +160,17 @@ void MaglevBalancer::initializeMaglev() {
 }
 
 void MaglevBalancer::maglevHash() {
-    return;
-}
-
-/*===================================================================*/
-
-void MaglevBalancer::initializeECMP() {
-    /* Set seed to represent randomly hashed packets. */
-    int seed = 1;
-    srand(seed);
-    return;
-}
-
-void MaglevBalancer::ECMP() {
+    //TODO create a connection tracking table
+    //TODO if hash is in the connection tracking table, send it to that one
+    //TODO if hash is not in connection tracking table, use maglev hashing
+    // and then add it to the connection tracking table
     cMessage *job = new cMessage("job");
-    
-    send(job, "out", rand() % _num_endpoints);
-
+    send(job, "out", _lookup[rand() % _num_entries]);
     scheduleAt(simTime() + 1, _send_msg_event);
+    return;
+}
+
+void MaglevBalancer::handleMessage(cMessage *msg) {
+    maglevHash();
     return;
 }
