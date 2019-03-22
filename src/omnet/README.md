@@ -13,3 +13,11 @@ opp_makemake --deep -f -o run_maglev
 ```
 2. Choose a backend number, e.g. 3.
 3. Choose a "large" prime as the lookup table size, e.g. 37. More primes [here](https://www.bigprimes.net/archive/prime/).
+
+## TODO Maglev
+* Find better hash functions
+* MaglevHash() function that simulates incoming packets
+* Connection tracking table
+* How to simulate traffic, and more specifically, traffic from same connection coming in?
+* Have to simulate increased load on an endpoint in endpoint.cc? Randomly assign it or have it adjust to how much traffic is sent?
+* Destructors
