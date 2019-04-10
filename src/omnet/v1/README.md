@@ -1,5 +1,7 @@
 ## Omnet implementation
 
+![Maglev w/ 5 backends](./doc/190322sample.png)
+
 ### To build
 1. Make sure that you set env (`. setenv`) from the omnet source.
 2. From this directory,
