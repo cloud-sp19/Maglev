@@ -19,7 +19,7 @@ make
 Config may tell you to install some dependencies. To start running it, run `omnetpp` from the omnetpp root directory.
 
 ### Installing inet
-Starting from the omnet root directory,
+Starting from the omnet root directory, https://github.com/inet-framework/inet/blob/master/INSTALL,
 ```
 cd samples
 git clone https://github.com/inet-framework/inet.git
