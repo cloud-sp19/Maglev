@@ -32,3 +32,9 @@ omnetpp
 From omnetpp, choose a project. Go into project>properties, and click on project references. Make sure that the window name is properties for inet4, or else add a reference to inet.
 
 Now, you can run your program by clicking the green play button.
+
+
+https://medium.com/google-cloud/graphical-user-interface-gui-for-google-compute-engine-instance-78fccda09e5c
+```
+ssh -L 5901:localhost:5901  tonydmyang@35.245.202.233 -i ~/.ssh/gcp
+```
