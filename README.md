@@ -34,6 +34,12 @@ From omnetpp, choose a project. Go into project>properties, and click on project
 Now, you can run your program by clicking the green play button.
 
 
+### VNC server
+From VM
+```
+vncserver
+nc 5901
+```
 https://medium.com/google-cloud/graphical-user-interface-gui-for-google-compute-engine-instance-78fccda09e5c
 ```
 ssh -L 5901:localhost:5901  tonydmyang@35.245.202.233 -i ~/.ssh/gcp
