@@ -1,4 +1,4 @@
-simple Server {
+module Server {
     gates:
         inout port;
 }

@@ -3,6 +3,6 @@
 
 using namespace omnetpp;
 
-class Server: public cSimpleModule {
-};
-Define_Module(Server);
+//class Server: public cSimpleModule {
+//};
+//Define_Module(Server);
