@@ -1,0 +1,28 @@
+file 666 1555720217                                             
+version 2
+run General-0-20190419-20:30:09-26496
+attr configname General
+attr datetime 20190419-20:30:09
+attr experiment General
+attr inifile fattree.ini
+attr iterationvars ""
+attr iterationvarsf ""
+attr measurement ""
+attr network Fattree
+attr processid 26496
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+vector 0 Fattree.server.ppp[0].queue queueLength:vector ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+vector 1 Fattree.server.ppp[0].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr source transmissionStateChanged
+attr title "tx state, vector"
+0	649 8 0 0 0 0 1 0 0 0 0
+1	657 8 0 0 0 0 1 0 0 0 0
+
