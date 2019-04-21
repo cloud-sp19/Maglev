@@ -1,4 +1,4 @@
 #!/bin/sh
 cd `dirname $0`
-../src/maglev -n .:../src $*
+../src/Maglev -n .:../src $*
 # for shared lib, use: opp_run -l ../src/maglev -n .:../src $*
