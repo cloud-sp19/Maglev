@@ -21,6 +21,7 @@ import maglev.CoreSwitch;
 import maglev.Pod;
 import inet.node.ethernet.Eth10G;
 import inet.node.ethernet.Eth100G;
+import inet.networklayer.configurator.ipv4.Ipv4NetworkConfigurator;
 
 //
 // TODO auto-generates type
@@ -30,6 +31,7 @@ network Fattree
     parameters:
         int k;
     submodules:
+        configurator : Ipv4NetworkConfigurator;
         server[(k^3)>>2] : Server;
         core[(k>>1)^2] : CoreSwitch;
         pod[k] : Pod {
