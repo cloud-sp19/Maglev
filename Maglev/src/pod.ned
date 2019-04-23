@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package maglev;
+package Maglev;
 
 import inet.node.ethernet.Eth10G;
 import inet.node.ethernet.Eth100G;

@@ -1,3 +1,3 @@
-package maglev.simulations;
+package Maglev.simulations;
 
 @license(LGPL);
