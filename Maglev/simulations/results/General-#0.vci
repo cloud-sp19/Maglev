@@ -1,28 +1,149 @@
-file 666 1555720217                                             
+file 5722 1556048128                                            
 version 2
-run General-0-20190419-20:30:09-26496
+run General-0-20190423-15:34:59-2112
 attr configname General
-attr datetime 20190419-20:30:09
+attr datetime 20190423-15:34:59
 attr experiment General
 attr inifile fattree.ini
 attr iterationvars ""
 attr iterationvarsf ""
 attr measurement ""
 attr network Fattree
-attr processid 26496
+attr processid 2112
 attr repetition 0
 attr replication #0
 attr resultdir results
 attr runnumber 0
 attr seedset 0
+param *.k 2
+param *.configurator.dumpAddresses true
+param *.configurator.dumpTopology true
+param *.configurator.dumpLinks true
+param *.configurator.dumpRoutes true
+param *.server[0].numApps 1
+param *.server[0].app[0].typename "\"TcpSessionApp\""
+param *.server[0].app[0].connectAddress "\"server[1]\""
 
-vector 0 Fattree.server.ppp[0].queue queueLength:vector ETV
-attr interpolationmode sample-hold
-attr title "queue length, vector"
-vector 1 Fattree.server.ppp[0].ppp transmissionState:vector ETV
-attr interpolationmode sample-hold
-attr source transmissionStateChanged
-attr title "tx state, vector"
-0	649 8 0 0 0 0 1 0 0 0 0
-1	657 8 0 0 0 0 1 0 0 0 0
+vector 0 Fattree.server[0].tcp tcpRcvQueueBytes ETV
+vector 1 Fattree.server[0].tcp "advertised window" ETV
+vector 2 Fattree.server[0].tcp "receive window" ETV
+vector 3 Fattree.server[0].tcp "sent ack" ETV
+vector 4 Fattree.server[0].ipv4.arp arpRequestSent:vector(packetBytes) ETV
+attr source arpRequestSent
+attr title "ARP request sent, vector(packetBytes)"
+vector 5 Fattree.server[0].eth[0].encap encapPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr source encapPk
+attr title "packets encapsulated, vector(packetBytes)"
+vector 6 Fattree.server[0].eth[0].mac packetReceivedFromUpper:vector(packetBytes) ETV
+attr interpolationmode none
+attr source packetReceivedFromUpper
+attr title "packet bytes from higher layer, vector(packetBytes)"
+vector 7 Fattree.server[0].eth[0].mac txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr source packetSentToLower
+attr title "packets transmitted, vector(packetBytes)"
+vector 8 Fattree.pod[0].edge[0].eth[1].mac rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr source rxPkOk
+attr title "packets received OK, vector(packetBytes)"
+vector 9 Fattree.pod[0].edge[0].eth[1].mac passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr source packetSentToUpper
+attr title "packets passed to higher layer, vector(packetBytes)"
+vector 10 Fattree.pod[0].edge[0].eth[0].mac packetReceivedFromUpper:vector(packetBytes) ETV
+attr interpolationmode none
+attr source packetReceivedFromUpper
+attr title "packet bytes from higher layer, vector(packetBytes)"
+vector 11 Fattree.pod[0].edge[0].eth[0].mac txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr source packetSentToLower
+attr title "packets transmitted, vector(packetBytes)"
+vector 12 Fattree.pod[0].agg[0].eth[0].mac rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr source rxPkOk
+attr title "packets received OK, vector(packetBytes)"
+vector 13 Fattree.pod[0].agg[0].eth[0].mac passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr source packetSentToUpper
+attr title "packets passed to higher layer, vector(packetBytes)"
+vector 14 Fattree.pod[0].agg[0].eth[1].mac packetReceivedFromUpper:vector(packetBytes) ETV
+attr interpolationmode none
+attr source packetReceivedFromUpper
+attr title "packet bytes from higher layer, vector(packetBytes)"
+vector 15 Fattree.pod[0].agg[0].eth[1].mac txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr source packetSentToLower
+attr title "packets transmitted, vector(packetBytes)"
+vector 16 Fattree.core[0].eth[1].mac rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr source rxPkOk
+attr title "packets received OK, vector(packetBytes)"
+vector 17 Fattree.core[0].eth[1].mac passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr source packetSentToUpper
+attr title "packets passed to higher layer, vector(packetBytes)"
+vector 18 Fattree.core[0].eth[0].mac packetReceivedFromUpper:vector(packetBytes) ETV
+attr interpolationmode none
+attr source packetReceivedFromUpper
+attr title "packet bytes from higher layer, vector(packetBytes)"
+vector 19 Fattree.core[0].eth[2].mac packetReceivedFromUpper:vector(packetBytes) ETV
+attr interpolationmode none
+attr source packetReceivedFromUpper
+attr title "packet bytes from higher layer, vector(packetBytes)"
+vector 20 Fattree.core[0].eth[0].mac txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr source packetSentToLower
+attr title "packets transmitted, vector(packetBytes)"
+vector 21 Fattree.core[0].eth[2].mac txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr source packetSentToLower
+attr title "packets transmitted, vector(packetBytes)"
+vector 22 Fattree.router.eth[0].mac rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr source rxPkOk
+attr title "packets received OK, vector(packetBytes)"
+vector 23 Fattree.router.eth[0].mac passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr source packetSentToUpper
+attr title "packets passed to higher layer, vector(packetBytes)"
+vector 24 Fattree.pod[1].agg[0].eth[1].mac rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr source rxPkOk
+attr title "packets received OK, vector(packetBytes)"
+vector 25 Fattree.pod[1].agg[0].eth[1].mac passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr source packetSentToUpper
+attr title "packets passed to higher layer, vector(packetBytes)"
+vector 26 Fattree.router.eth[0].encap decapPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr source decapPk
+attr title "packets decapsulated, vector(packetBytes)"
+0	5202 8 2 2 1 1 1 0 0 0 0
+1	5210 11 2 2 1 1 1 7504 7504 7504 56310016
+2	5221 11 2 2 1 1 1 7504 7504 7504 56310016
+3	5232 8 2 2 1 1 1 0 0 0 0
+4	5240 9 3 3 1 1 1 28 28 28 784
+5	5249 9 4 4 1 1 1 28 28 28 784
+6	5258 9 5 5 1 1 1 64 64 64 4096
+7	5267 21 6 6 1.00000000576 1.00000000576 1 64 64 64 4096
+8	5288 21 9 9 1.00000005576 1.00000005576 1 64 64 64 4096
+9	5309 21 9 9 1.00000005576 1.00000005576 1 64 64 64 4096
+10	5330 23 11 11 1.00000005576 1.00000005576 1 64 64 64 4096
+11	5353 23 14 14 1.00000011336 1.00000011336 1 64 64 64 4096
+12	5376 23 16 16 1.00000016336 1.00000016336 1 64 64 64 4096
+13	5399 23 16 16 1.00000016336 1.00000016336 1 64 64 64 4096
+14	5422 23 18 18 1.00000016336 1.00000016336 1 64 64 64 4096
+15	5445 23 19 19 1.00000016912 1.00000016912 1 64 64 64 4096
+16	5468 23 23 23 1.00000021912 1.00000021912 1 64 64 64 4096
+17	5491 23 23 23 1.00000021912 1.00000021912 1 64 64 64 4096
+18	5514 23 25 25 1.00000021912 1.00000021912 1 64 64 64 4096
+19	5537 23 26 26 1.00000021912 1.00000021912 1 64 64 64 4096
+20	5560 23 28 28 1.00000022488 1.00000022488 1 64 64 64 4096
+21	5583 23 29 29 1.00000022488 1.00000022488 1 64 64 64 4096
+22	5606 23 33 33 1.00000027488 1.00000027488 1 64 64 64 4096
+23	5629 23 33 33 1.00000027488 1.00000027488 1 64 64 64 4096
+24	5652 23 34 34 1.00000027488 1.00000027488 1 64 64 64 4096
+25	5675 23 34 34 1.00000027488 1.00000027488 1 64 64 64 4096
+26	5698 23 35 35 1.00000027488 1.00000027488 1 46 46 46 2116
 

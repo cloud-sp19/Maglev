@@ -2,7 +2,7 @@
 # OMNeT++/OMNEST Makefile for Maglev
 #
 # This file was generated with the command:
-#  opp_makemake -f --deep -KINET_PROJ=../../../../../inet -DINET_IMPORT -L$$\(INET_PROJ\)/src -lINET$$\(D\)
+#  opp_makemake -f --deep -KINET_PROJ=/Users/kristinyim/Documents/Cloud/omnetpp-5.4.1/inet4 -DINET_IMPORT -L$$\(INET_PROJ\)/src -lINET$$\(D\)
 #
 
 # Name of target to be created (-o option)
@@ -39,7 +39,7 @@ MSGFILES =
 SMFILES =
 
 # Other makefile variables (-K)
-INET_PROJ=../../../../../inet
+INET_PROJ=/Users/kristinyim/Documents/Cloud/omnetpp-5.4.1/inet4
 
 #------------------------------------------------------------------------------
 
