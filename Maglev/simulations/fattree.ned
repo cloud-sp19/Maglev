@@ -22,6 +22,8 @@ import maglev.Pod;
 import inet.node.ethernet.Eth10G;
 import inet.node.ethernet.Eth100G;
 import inet.networklayer.configurator.ipv4.Ipv4NetworkConfigurator;
+import inet.node.inet.StandardHost;
+import inet.node.inet.Router;
 
 //
 // TODO auto-generates type
@@ -31,13 +33,17 @@ network Fattree
     parameters:
         int k;
     submodules:
-        configurator : Ipv4NetworkConfigurator;
-        server[(k^3)>>2] : Server;
+        configurator : Ipv4NetworkConfigurator {
+    		config = default(xml("<config><interface hosts='**' address='10.x.x.x' netmask='255.x.x.x'/></config>"));   
+    	}
+        server[(k^3)>>2] : StandardHost;
         core[(k>>1)^2] : CoreSwitch;
         pod[k] : Pod {
             k=k;
         };
-        router : Router;
+        router : Router {
+            hasTcp=true;
+        }
         
     connections allowunconnected:
         for i=0..(k>>1)^2-1 {
