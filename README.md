@@ -1,12 +1,5 @@
 # Omnet installation
 
-## Google Cloud
-### Create a VM instance
-* Open navbar, hover over compute engine, then click VM instances
-* Generate ssh key: `ssh-keygen -t rsa -f ~/.ssh/gcp -C <username>`, https://cloud.google.com/compute/docs/instances/adding-removing-ssh-keys
-* Add ssh public key (`~/.ssh/gcp`) to compute engine metadata, https://console.cloud.google.com/compute/metadata/sshKeys
-* Ssh into instance: `ssh -X <username>@<external vm ip>  -i ~/.ssh/gcp.pub`
-
 ### Installing omnetpp
 ```
 curl -o omnetpp-5.4.1-src-linux.tgz https://ipfs.omnetpp.org/release/5.4.1/omnetpp-5.4.1-src-linux.tgz
@@ -16,20 +9,17 @@ cd omnetpp-5.4.1
 ./configure
 make
 ```
-Config may tell you to install some dependencies. To start running it, run `omnetpp` from the omnetpp root directory.
+Config may tell you to install some dependencies. If you get an issue with OSG, just follow its instruction to disable it in the configuration file. To start running omnetpp, run `omnetpp` from the omnetpp root directory.
 
 ### Installing inet
-Starting from the omnet root directory, https://github.com/inet-framework/inet/blob/master/INSTALL,
+Download inet from https://inet.omnetpp.org/Download.html, place it anywhere, it does not necessarily need to be in the omnet/samples folder.
 ```
-cd samples
-git clone https://github.com/inet-framework/inet.git
-cd inet
+cd inet4
 make makefiles
 make
-cd ..
-omnetpp
+. setenv
 ```
-From omnetpp, choose a project. Go into project>properties, and click on project references. Make sure that the window name is properties for inet4, or else add a reference to inet.
+From omnetpp, choose a project. Go into project>properties, and click on project references. Check off inet. Open inet and run an example to make sure that it's working.
 
 Now, you can run your program by clicking the green play button.
 
