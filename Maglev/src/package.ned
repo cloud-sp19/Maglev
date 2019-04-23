@@ -1,3 +1,3 @@
-package maglev;
+package Maglev;
 
 @license(LGPL);

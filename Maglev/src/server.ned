@@ -13,10 +13,16 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package maglev;
+package Maglev;
 
 import inet.node.inet.StandardHost;
 
 module Server extends StandardHost
+{
+}
+module User extends StandardHost
+{
+}
+module Endpoint extends StandardHost
 {
 }

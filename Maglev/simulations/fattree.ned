@@ -13,12 +13,14 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package maglev.simulations;
+package Maglev.simulations;
 
-import maglev.Server;
-import maglev.Router;
-import maglev.CoreSwitch;
-import maglev.Pod;
+import Maglev.Server;
+import Maglev.Endpoint;
+import Maglev.User;
+import Maglev.Router;
+import Maglev.CoreSwitch;
+import Maglev.Pod;
 import inet.node.ethernet.Eth10G;
 import inet.node.ethernet.Eth100G;
 import inet.networklayer.configurator.ipv4.Ipv4NetworkConfigurator;
@@ -32,17 +34,30 @@ network Fattree
 {
     parameters:
         int k;
+        int num_endpoints;
     submodules:
         configurator : Ipv4NetworkConfigurator {
     		config = default(xml("<config><interface hosts='**' address='10.x.x.x' netmask='255.x.x.x'/></config>"));   
     	}
-        server[(k^3)>>2] : StandardHost;
-        core[(k>>1)^2] : CoreSwitch;
+        server[(k^3)>>2] : StandardHost {
+          @display("p=400,400,r,50");
+        }
+        core[(k>>1)^2] : CoreSwitch {
+          @display("p=300,200,r,100");
+        }
         pod[k] : Pod {
             k=k;
+            @display("p=400,300,r,100");
         };
+        endpoint[num_endpoints] : Endpoint {
+          @display("p=600,600,r,100");   
+        }
+        user : User {
+          @display("p=100,100"); 
+        }
         router : Router {
             hasTcp=true;
+            @display("p=200,100");   
         }
         
     connections allowunconnected:
@@ -53,5 +68,9 @@ network Fattree
             pod[i].uplink++ <--> Eth100G <--> core[j].ethg++;
         	pod[i].downlink++ <--> Eth100G <--> server[i*(k>>1)^2 + j].ethg++;
         }
-        
+        for i=0..num_endpoints-1, for j=0..((k^3)>>2)-1 {
+            server[j].ethg++ <--> Eth100G <--> endpoint[i].ethg++;
+            endpoint[i].ethg++ <--> Eth100G <--> router.ethg++;
+        }
+        router.ethg++ <--> Eth100G <--> user.ethg++;
 }
