@@ -29,3 +29,6 @@ Add Maglev to your omnet projects
 Make sure to add inet as a reference
 Set environment by running in the iNET root folder:
 $. setenv 
+
+## Other references
+https://stackoverflow.com/questions/38392495/how-to-extend-a-simple-module-from-inet
