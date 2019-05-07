@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="2c00246e-0717-4db6-bab5-3f56f159411d" name="User" url="http://aceslabclass.umd.edu">
+        <fileTransfer host="aceslabclass.umd.edu" port="41339" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="41339" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

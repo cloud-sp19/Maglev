@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" autoUpload="Always" serverName="Endpoint 1" autoUploadExternalChanges="true">
+    <serverData>
+      <paths name="Endpoint 1">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/root/endpoints" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="Endpoint 2">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/root/endpoints" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myAutoUpload" value="ALWAYS" />
+  </component>
+</project>
